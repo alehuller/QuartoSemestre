@@ -1,0 +1,95 @@
+body {
+    background-color: white; 
+    font-size: 16px;
+}
+
+main {
+    background-color: white;
+    width: 75%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+h1 {
+    text-transform: uppercase;
+    text-align: left;
+}
+
+#dados-pessoais {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    column-gap: 50px;
+    margin-top: 50px;
+}
+
+#dados-pessoais > div:first-of-type {
+    border: 3px solid #444;
+    border-radius: 100%;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+}
+
+#dados-pessoais > div:first-of-type > img {
+    width: 100%;
+}
+
+#dados-pessoais > div:last-of-type {
+    font-size: 1.25em;
+    border-right: none;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    flex-grow: 1;
+    margin-right: -10px;
+}
+
+#dados-profissionais {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.area-dados {
+    background-color: rgb(67, 138, 231);
+    border: 2px solid #444;
+    box-shadow: -5px -5px 10px #999;
+    padding: 10px 30px;
+    flex-grow: 1;
+    margin: 30px 20px;
+}
+
+.area-dados > h2 {
+    text-align: left;
+}
+
+.area-dados > ul {
+    list-style: none;
+}
+
+
+
+#idiomas > table {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+#idiomas > table td {
+    text-align: center;
+}
+
+#idiomas > h2 {
+    text-align: center;
+}
+
+#idiomas > table > tbody tr:nth-child(2n+1) {
+    background-color: rgb(67, 138, 231);
+}
+  
+#idiomas > table > tbody tr:nth-child(2n) {
+    background-color: rgb(67, 138, 231);
+}
