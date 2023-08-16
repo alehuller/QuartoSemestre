@@ -1,0 +1,11 @@
+//codigo a ser avaliado
+package empresa;
+
+public class Empresa {
+	public static void main (String[] args) {
+		System.out.println("O maior salário da empresa é: " + Salario.getInstance().getMaiorSalario());
+		System.out.println(Salario.getInstance().getSalarioJunior());
+		System.out.println(Salario.getInstance().getSalarioPleno());
+		System.out.println(Salario.getInstance().getSalarioSenior());
+	}
+}

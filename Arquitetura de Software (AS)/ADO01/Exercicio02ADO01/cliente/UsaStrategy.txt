@@ -1,0 +1,26 @@
+package cliente;
+
+import strategy.*;
+
+public class UsaStrategy {
+	public static void main (String[] args) {
+		Orcamento orcamento = new Orcamento(2500);
+		Orcamento orcamentoCelular = new Orcamento(3000);
+		Orcamento orcamentoBatom = new Orcamento(30);
+		Orcamento orcamentoFeijao = new Orcamento(12.5);
+		
+		Eletronico celular = new Eletronico();
+		Cosmetico batom = new Cosmetico();
+		Alimento feijao = new Alimento();
+		
+		System.out.println(celular.calcImposto(orcamento));
+		System.out.println(feijao.calcImposto(orcamento));
+		System.out.println(batom.calcImposto(orcamento));
+		
+		System.out.println("");
+		
+		System.out.println(celular.calcImposto(orcamentoCelular));
+		System.out.println(feijao.calcImposto(orcamentoFeijao));
+		System.out.println(batom.calcImposto(orcamentoBatom));
+	}
+}

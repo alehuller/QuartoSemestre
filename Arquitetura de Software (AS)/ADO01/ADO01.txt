@@ -1,0 +1,429 @@
+//codigo a ser avaliado
+package empresa;
+
+public class Empresa {
+	public static void main (String[] args) {
+		System.out.println("O maior salário da empresa é: " + Salario.getInstance().getMaiorSalario());
+		System.out.println(Salario.getInstance().getSalarioJunior());
+		System.out.println(Salario.getInstance().getSalarioPleno());
+		System.out.println(Salario.getInstance().getSalarioSenior());
+	}
+}
+
+//codigo a ser avaliado
+package empresa;
+
+public class Salario {
+	private static Salario sin;
+    
+    private Salario(){
+    }
+    
+    public static synchronized Salario getInstance(){ //synchronized faz com que o método não seja acessado por mais de uma thread ao mesmo tempo. Sempre as intâncias da classe dão na mesma thread. Dessa maneira, o código não é quebrado.
+      if(sin==null)
+          sin=new Salario();
+        
+      return sin;
+    }
+    
+    public String getMaiorSalario() {
+    	return "R$ 50.000";
+    }
+    
+    public String getSalarioJunior() {
+    	return "Salário Junior: R$ 5000";
+    }
+    
+    public String getSalarioPleno() {
+    	return "Salário Pleno: R$ 10000";
+    }
+    
+    public String getSalarioSenior() {
+    	return "Salário Senior: R$ 20000";
+    }
+}
+
+//codigo usado como base
+package lazysingleton;
+
+public class CenarioGame extends Thread{
+	
+	@Override
+    public void run(){
+      Singleton s1=Singleton.getInstance();
+      System.out.println(s1);
+    }
+
+    public static void main(String[] args) {
+        CenarioGame t1=new CenarioGame();
+        CenarioGame t2=new CenarioGame();
+        
+        t1.start();
+        t2.start();
+    }
+
+}
+
+//codigo usado como base
+package lazysingleton;
+
+public class Singleton {
+	private static Singleton sin;
+    
+    private Singleton(){
+    }
+    
+    public static synchronized Singleton getInstance(){ //synchronized faz com que o método não seja acessado por mais de uma thread ao mesmo tempo. Sempre as intâncias da classe dão na mesma thread. Dessa maneira, o código não é quebrado.
+      if(sin==null)
+          sin=new Singleton();
+        
+      return sin;
+    }
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package cliente;
+
+public class Orcamento {
+	private double orcamento;
+
+	public Orcamento(double orcamento) {
+		this.orcamento = orcamento;
+	}
+
+	public double getOrcamento() {
+		return orcamento;
+	}
+}
+
+package cliente;
+
+import strategy.*;
+
+public class UsaStrategy {
+	public static void main (String[] args) {
+		Orcamento orcamento = new Orcamento(2500);
+		Orcamento orcamentoCelular = new Orcamento(3000);
+		Orcamento orcamentoBatom = new Orcamento(30);
+		Orcamento orcamentoFeijao = new Orcamento(12.5);
+		
+		Eletronico celular = new Eletronico();
+		Cosmetico batom = new Cosmetico();
+		Alimento feijao = new Alimento();
+		
+		System.out.println(celular.calcImposto(orcamento));
+		System.out.println(feijao.calcImposto(orcamento));
+		System.out.println(batom.calcImposto(orcamento));
+		
+		System.out.println("");
+		
+		System.out.println(celular.calcImposto(orcamentoCelular));
+		System.out.println(feijao.calcImposto(orcamentoFeijao));
+		System.out.println(batom.calcImposto(orcamentoBatom));
+	}
+}
+
+package strategy;
+
+import cliente.Orcamento;
+
+public class Alimento implements Imposto{
+
+	@Override
+	public double calcImposto(Orcamento orcamento) {
+		return orcamento.getOrcamento() * 1.1;
+	}
+
+}
+
+package strategy;
+
+import cliente.Orcamento;
+
+public class Cosmetico implements Imposto{
+
+	@Override
+	public double calcImposto(Orcamento orcamento) {
+		return orcamento.getOrcamento() * 1.15;
+	}
+
+}
+
+package strategy;
+
+import cliente.Orcamento;
+
+public class Eletronico implements Imposto{
+	
+	@Override
+	public double calcImposto(Orcamento orcamento) {
+		return orcamento.getOrcamento() * 1.25;
+	}
+
+}
+
+package strategy;
+
+import cliente.Orcamento;
+
+public interface Imposto {
+	public double calcImposto(Orcamento orcamento);
+}
+
+//alternativo com ENUM para o exercicio
+//package strategy;
+
+//import cliente.Orcamento;
+
+//public enum Produto implements Imposto{
+	 //{
+
+		//@Override
+		//public double calcImposto(Orcamento orcamento) {
+			//return orcamento.getOrcamento() * 1.25;
+		//}
+		
+	//},  {
+
+		//@Override
+		//public double calcImposto(Orcamento orcamento) {
+			//return orcamento.getOrcamento() * 1.15;
+		//}
+		
+	//},  {
+
+		//@Override
+		//public double calcImposto(Orcamento orcamento) {
+			//return orcamento.getOrcamento() * 1.1;
+		//}
+		
+	//};
+//}
+
+////////////////////////////////////////////////////////////
+
+package cliente;
+
+import strategy.Ordenacao;
+
+public class ListaOrdenacao {
+	public int[] ordenacao (Ordenacao o) {
+		return o.ordenar();
+	}
+}
+
+package cliente;
+
+import java.util.Arrays;
+
+import strategy.*;
+
+public class UsaStragegy {
+	public static void main(String[] args) {
+		int[] ordenarBubble = {10, 5, 1, 2, 4, 8, 10, 3, 9, 6, 7, 10};
+		int[] ordenarInsertion = {202, 50, 32, 2, 78};
+		int[] ordenarSelection = {45, 23, 1, 6, 0, 80, 105};
+		
+		System.out.println("Bubble: " + Arrays.toString(new ListaOrdenacao().ordenacao(new Bubble(ordenarBubble))));
+		System.out.println("Insertion: " + Arrays.toString(new ListaOrdenacao().ordenacao(new Insertion(ordenarInsertion))));
+		System.out.println("Selection: " + Arrays.toString(new ListaOrdenacao().ordenacao(new Selection(ordenarSelection))));
+	}
+}
+
+package strategy;
+
+public class Bubble implements Ordenacao{
+
+	int[] resultado;
+	
+	public Bubble(int[] resultado) {
+		this.resultado = resultado;
+	}
+	
+	@Override
+	public int[] ordenar() {
+		int i, j;
+		int temp;
+		for(j = 0;j < this.resultado.length - 1; j++)
+			for(i = 0;i < this.resultado.length -1 - j; i++)
+				if(this.resultado[i] > this.resultado[i+1]) {
+					temp = this.resultado[i];
+					this.resultado[i] = this.resultado[i+1];
+					this.resultado[i+1] = temp;
+		}
+		return this.resultado;
+	}
+
+}
+
+package strategy;
+
+public class Insertion implements Ordenacao{
+	
+	int[] resultado;
+	
+	public Insertion(int[] resultado) {
+		this.resultado = resultado;
+	}
+	
+	@Override
+	public int[] ordenar() {
+		int i, j;
+		int temp;
+		for(i = 1; i < this.resultado.length; i++) {
+			temp = this.resultado[i];
+			j = i;
+			while(j > 0 && this.resultado[j-1] >= temp) {
+				this.resultado[j] = this.resultado[j-1];
+				j--;
+			}
+			this.resultado[j] = temp;
+		}
+		return this.resultado;
+	}
+
+}
+
+package strategy;
+
+public interface Ordenacao {
+	public int[] ordenar();
+}
+
+package strategy;
+
+public class Selection implements Ordenacao{
+	
+	int[] resultado;
+	
+	public Selection(int[] resultado) {
+		this.resultado = resultado;
+	}
+
+	@Override
+	public int[] ordenar() {
+		int i, j, min, aux;
+		for(i = 0; i<this.resultado.length-1; i++) {
+			min = i;
+			for(j = i + 1;j < this.resultado.length; j++)
+				if(this.resultado[j] < this.resultado[min])
+					min = j;
+		
+		aux = this.resultado[i];
+		this.resultado[i] = this.resultado[min];
+		this.resultado[min] = aux;
+		}
+		return this.resultado;
+	}
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+package cliente;
+
+import composite.Pedido;
+import composite.Produto;
+import composite.Promocao;
+
+public class carrinhoCompra {
+	public static void main(String[] args) {
+		Pedido pedido = new Pedido("Alejandro", 1, 100);
+		
+		Produto produto1 = new Promocao("Lâmpada", 25, 0.10);
+		Produto produto2 = new Promocao("Vaso", 25, 0.5);
+		Produto produto3 = new Promocao("Pilha", 25, 0.0);
+		Produto produto4 = new Promocao("Planta", 25, 0.10);
+		
+		Pedido carrinho = new Pedido("Alejandro Carrinho", 1, 100);
+		carrinho.adicionar(produto1);
+		carrinho.adicionar(produto2);
+		
+		pedido.adicionar(produto3);
+		pedido.adicionar(produto4);
+		pedido.adicionar(carrinho);
+		
+		System.out.println(pedido);
+		System.out.println("Total com desconto = " + pedido.getPreco());
+	}
+}
+
+package composite;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pedido implements Produto{
+
+	private List<Produto> lista;
+	private String nomeCliente;
+	private int numeroPedido;
+	private double totalCompra;
+	
+	public Pedido(String nomeCliente, int numeroPedido, double totalCompra) {
+		lista = new ArrayList<>();
+		this.nomeCliente = nomeCliente;
+		this.numeroPedido = numeroPedido;
+		this.totalCompra = totalCompra;
+	}
+
+	public void adicionar(Produto produto) {
+        lista.add(produto);
+    }
+
+    public void remover(Produto produto) {
+        lista.remove(produto);
+    }
+
+	@Override
+	public double getPreco() {
+		double total = 0;
+        for (Produto p : lista) {
+            total += p.getPreco();
+        }
+        return total;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido" + lista + ", nomeCliente=" + nomeCliente + ", numeroPedido=" + numeroPedido
+				+ ", totalCompra=" + totalCompra;
+	}
+	
+	
+	
+}
+
+package composite;
+
+public interface Produto {
+	public double getPreco();
+}
+
+package composite;
+
+public class Promocao implements Produto{
+	private String nome;
+	private double preco;
+	private double desconto;
+	
+	public Promocao(String nome, double preco, double desconto) {
+		this.nome = nome;
+		this.preco = preco;
+		this.desconto = preco - (preco * desconto);
+	}
+
+	@Override
+	public double getPreco() {
+		return desconto;
+	}
+
+	@Override
+	public String toString() {
+		return "Promocao [nome=" + nome + ", preco=" + preco + ", desconto=" + desconto + "]";
+	}
+	
+	
+}

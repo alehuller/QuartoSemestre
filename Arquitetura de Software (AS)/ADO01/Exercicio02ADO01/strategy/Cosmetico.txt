@@ -1,0 +1,12 @@
+package strategy;
+
+import cliente.Orcamento;
+
+public class Cosmetico implements Imposto{
+
+	@Override
+	public double calcImposto(Orcamento orcamento) {
+		return orcamento.getOrcamento() * 1.15;
+	}
+
+}

@@ -1,0 +1,9 @@
+package cliente;
+
+import strategy.Ordenacao;
+
+public class ListaOrdenacao {
+	public int[] ordenacao (Ordenacao o) {
+		return o.ordenar();
+	}
+}

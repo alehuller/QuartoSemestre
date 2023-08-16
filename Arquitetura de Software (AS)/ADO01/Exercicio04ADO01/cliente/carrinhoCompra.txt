@@ -1,0 +1,27 @@
+package cliente;
+
+import composite.Pedido;
+import composite.Produto;
+import composite.Promocao;
+
+public class carrinhoCompra {
+	public static void main(String[] args) {
+		Pedido pedido = new Pedido("Alejandro", 1, 100);
+		
+		Produto produto1 = new Promocao("Lâmpada", 25, 0.10);
+		Produto produto2 = new Promocao("Vaso", 25, 0.5);
+		Produto produto3 = new Promocao("Pilha", 25, 0.0);
+		Produto produto4 = new Promocao("Planta", 25, 0.10);
+		
+		Pedido carrinho = new Pedido("Alejandro Carrinho", 1, 100);
+		carrinho.adicionar(produto1);
+		carrinho.adicionar(produto2);
+		
+		pedido.adicionar(produto3);
+		pedido.adicionar(produto4);
+		pedido.adicionar(carrinho);
+		
+		System.out.println(pedido);
+		System.out.println("Total com desconto = " + pedido.getPreco());
+	}
+}

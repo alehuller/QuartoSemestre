@@ -1,0 +1,32 @@
+//codigo a ser avaliado
+package empresa;
+
+public class Salario {
+	private static Salario sin;
+    
+    private Salario(){
+    }
+    
+    public static synchronized Salario getInstance(){ //synchronized faz com que o método não seja acessado por mais de uma thread ao mesmo tempo. Sempre as intâncias da classe dão na mesma thread. Dessa maneira, o código não é quebrado.
+      if(sin==null)
+          sin=new Salario();
+        
+      return sin;
+    }
+    
+    public String getMaiorSalario() {
+    	return "R$ 50.000";
+    }
+    
+    public String getSalarioJunior() {
+    	return "Salário Junior: R$ 5000";
+    }
+    
+    public String getSalarioPleno() {
+    	return "Salário Pleno: R$ 10000";
+    }
+    
+    public String getSalarioSenior() {
+    	return "Salário Senior: R$ 20000";
+    }
+}

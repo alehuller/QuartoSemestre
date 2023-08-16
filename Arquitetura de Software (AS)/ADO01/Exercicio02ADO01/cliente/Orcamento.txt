@@ -1,0 +1,13 @@
+package cliente;
+
+public class Orcamento {
+	private double orcamento;
+
+	public Orcamento(double orcamento) {
+		this.orcamento = orcamento;
+	}
+
+	public double getOrcamento() {
+		return orcamento;
+	}
+}

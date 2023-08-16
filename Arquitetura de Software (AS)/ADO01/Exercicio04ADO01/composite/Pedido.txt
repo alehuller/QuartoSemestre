@@ -1,0 +1,45 @@
+package composite;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pedido implements Produto{
+
+	private List<Produto> lista;
+	private String nomeCliente;
+	private int numeroPedido;
+	private double totalCompra;
+	
+	public Pedido(String nomeCliente, int numeroPedido, double totalCompra) {
+		lista = new ArrayList<>();
+		this.nomeCliente = nomeCliente;
+		this.numeroPedido = numeroPedido;
+		this.totalCompra = totalCompra;
+	}
+
+	public void adicionar(Produto produto) {
+        lista.add(produto);
+    }
+
+    public void remover(Produto produto) {
+        lista.remove(produto);
+    }
+
+	@Override
+	public double getPreco() {
+		double total = 0;
+        for (Produto p : lista) {
+            total += p.getPreco();
+        }
+        return total;
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido" + lista + ", nomeCliente=" + nomeCliente + ", numeroPedido=" + numeroPedido
+				+ ", totalCompra=" + totalCompra;
+	}
+	
+	
+	
+}

@@ -1,0 +1,27 @@
+package strategy;
+
+public class Insertion implements Ordenacao{
+	
+	int[] resultado;
+	
+	public Insertion(int[] resultado) {
+		this.resultado = resultado;
+	}
+	
+	@Override
+	public int[] ordenar() {
+		int i, j;
+		int temp;
+		for(i = 1; i < this.resultado.length; i++) {
+			temp = this.resultado[i];
+			j = i;
+			while(j > 0 && this.resultado[j-1] >= temp) {
+				this.resultado[j] = this.resultado[j-1];
+				j--;
+			}
+			this.resultado[j] = temp;
+		}
+		return this.resultado;
+	}
+
+}

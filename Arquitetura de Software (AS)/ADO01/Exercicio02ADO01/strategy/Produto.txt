@@ -1,0 +1,29 @@
+//alternativo com ENUM para o exercicio
+//package strategy;
+
+//import cliente.Orcamento;
+
+//public enum Produto implements Imposto{
+	 //{
+
+		//@Override
+		//public double calcImposto(Orcamento orcamento) {
+			//return orcamento.getOrcamento() * 1.25;
+		//}
+		
+	//},  {
+
+		//@Override
+		//public double calcImposto(Orcamento orcamento) {
+			//return orcamento.getOrcamento() * 1.15;
+		//}
+		
+	//},  {
+
+		//@Override
+		//public double calcImposto(Orcamento orcamento) {
+			//return orcamento.getOrcamento() * 1.1;
+		//}
+		
+	//};
+//}

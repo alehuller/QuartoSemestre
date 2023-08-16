@@ -1,0 +1,125 @@
+package app;
+import entities.*;
+public class App {
+    public static void main(String[] args) {
+        DiretoriaComposite lista = new DiretoriaComposite();
+        DepartamentoLeaf departamento1 = new DepartamentoLeaf(12.000, 13);
+        DepartamentoLeaf departamento2 = new DepartamentoLeaf(17.000, 33);
+        DepartamentoLeaf departamento3 = new DepartamentoLeaf(18.000, 25);
+
+        lista.adicionar(departamento3);
+        lista.adicionar(departamento1);
+        lista.adicionar(departamento2);
+
+        System.out.printf("%.3f", lista.getCusto());
+        System.out.println();
+        System.out.println(lista.getFuncionarios());
+
+    }
+
+}
+
+
+
+
+package entities;
+public interface DepartamentoComponent {
+    public double getCusto();
+    public int getFuncionarios();
+    
+}
+
+
+
+
+package entities;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DiretoriaComposite implements DepartamentoComponent {
+    private List<DepartamentoComponent> lista;
+
+
+    public DiretoriaComposite() {
+        lista = new ArrayList<>();
+    }
+
+    public void adicionar(DepartamentoComponent departamento){
+        lista.add(departamento);
+    }
+
+    public void remover(DepartamentoComponent departamento){
+        lista.remove(departamento);
+    }
+
+    public List<DepartamentoComponent> getLista(){
+        return lista;
+    }
+
+    @Override
+    public double getCusto() {
+        double total=0;
+        for(DepartamentoComponent c:lista){
+          total+=c.getCusto();
+        }
+       return total;
+     }
+
+    @Override
+    public int getFuncionarios() {
+        int total=0;
+        for(DepartamentoComponent c:lista){
+          total +=c.getFuncionarios();
+        }
+       return total;
+     }
+
+     @Override
+     public String toString(){
+    return "Custo Total: " + getCusto() +
+            "Quantidade de Funcionarios: " + getFuncionarios();
+
+     }
+}
+
+
+
+
+package entities;
+public class DepartamentoLeaf implements DepartamentoComponent {
+    private double custo;
+    private int funcionarios;
+
+    
+
+    public DepartamentoLeaf(double custo, int funcionarios) {
+        this.custo = custo;
+        this.funcionarios = funcionarios;
+    }
+
+    @Override
+    public double getCusto() {
+        return custo;
+    }
+
+    @Override
+    public int getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setCusto(double custo) {
+        this.custo = custo;
+    }
+
+    public void setFuncionarios(int funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+    @Override
+    public String toString(){
+        return "Custo: " + getCusto() +
+        "Total de funcionarios" + getFuncionarios();
+    }
+}
+

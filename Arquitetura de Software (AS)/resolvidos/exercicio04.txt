@@ -1,0 +1,274 @@
+package cliente;
+
+import factory.*;
+
+public class UsaFabrica {
+	public static void main(String[] args) {
+		Fabrica fabrica = new FabricaCursos();
+		System.out.println(fabrica.factoryMethody(ListaCursos.values()[0], ListaUnidade.values()[0]));
+		System.out.println(fabrica.factoryMethody(ListaCursos.values()[1], ListaUnidade.values()[1]));
+		System.out.println(fabrica.factoryMethody(ListaCursos.values()[2], ListaUnidade.values()[2]));
+	}
+}
+
+
+
+package factory;
+
+public interface Curso {
+	public String getRequisito();
+}
+
+
+
+package factory;
+
+public interface CursoLocal {
+	public String getEndereco();
+}
+
+
+
+package factory;
+
+public interface Fabrica {
+	public Curso factoryMethody(ListaCursos curso, ListaUnidade unidade);
+}
+
+
+
+package factory;
+
+public class FabricaCursos implements Fabrica{
+
+	@Override
+	public Curso factoryMethody(ListaCursos curso, ListaUnidade unidade) {
+		if(curso.equals(ListaCursos.GRADUACAOPRESENCIAL) && unidade.equals(ListaUnidade.LIBERDADE)) {
+			return new GraduacaoPresencial ("Liberdade", "Ensino Medio");
+		}
+		else if(curso.equals(ListaCursos.GRADUACAOPRESENCIAL) && unidade.equals(ListaUnidade.SANTOAMARO)) {
+			return new GraduacaoPresencial ("Santo Amaro", "Ensino Medio");
+		}
+		else if(curso.equals(ListaCursos.GRADUACAOPRESENCIAL) && unidade.equals(ListaUnidade.SOCORRO)) {
+			return new GraduacaoPresencial ("Socorro", "Ensino Medio");
+		}
+		else if(curso.equals(ListaCursos.POSGRADUACAO) && unidade.equals(ListaUnidade.LIBERDADE)) {
+			return new PosGraduacao ("Liberdade", "Graduacao");
+		}
+		else if(curso.equals(ListaCursos.POSGRADUACAO) && unidade.equals(ListaUnidade.SANTOAMARO)) {
+			return new PosGraduacao ("Santo Amaro", "Graduacao");
+		}
+		else if(curso.equals(ListaCursos.POSGRADUACAO) && unidade.equals(ListaUnidade.SOCORRO)) {
+			return new PosGraduacao ("Socorro", "Graduacao");
+		}
+		else if(curso.equals(ListaCursos.GRADUACAOEAD) && unidade.equals(ListaUnidade.LIBERDADE)) {
+			return new GraduacaoEad ("Liberdade", "Ensino Medio");
+		}
+		else if(curso.equals(ListaCursos.GRADUACAOEAD) && unidade.equals(ListaUnidade.SANTOAMARO)) {
+			return new GraduacaoEad ("Santo Amaro", "Ensino Medio");
+		}
+		else if(curso.equals(ListaCursos.GRADUACAOEAD) && unidade.equals(ListaUnidade.SOCORRO)) {
+			return new GraduacaoEad ("Socorro", "Ensino Medio");
+		}
+		return null;
+	}
+
+}
+
+
+
+package factory;
+
+public class GraduacaoEad implements Curso{
+	private String requisito;
+	private String local;
+	
+	public GraduacaoEad(String local, String requisito) {
+		this.local = local;
+		this.requisito = requisito;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public void setRequisito(String requisito) {
+		this.requisito = requisito;
+	}
+
+	@Override
+	public String getRequisito() {
+		return requisito;
+	}
+
+	@Override
+	public String toString() {
+		return "GraduacaoEad [requisito=" + requisito + ", local=" + local + "]";
+	}
+}
+
+
+
+package factory;
+
+public class GraduacaoPresencial implements Curso{
+	private String requisito;
+	private String local;
+	
+	public GraduacaoPresencial(String local, String requisito) {
+		this.local = local;
+		this.requisito = requisito;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public void setRequisito(String requisito) {
+		this.requisito = requisito;
+	}
+
+	@Override
+	public String getRequisito() {
+		return requisito;
+	}
+
+	@Override
+	public String toString() {
+		return "GraduacaoPresencial [requisito=" + requisito + ", local=" + local + "]";
+	}
+}
+
+
+
+package factory;
+
+public class Liberdade implements CursoLocal{
+private String endereco;
+	
+	public Liberdade(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	@Override
+	public String getEndereco() {
+		return endereco;
+	}
+}
+
+
+
+package factory;
+
+public enum ListaCursos {
+	GRADUACAOPRESENCIAL, GRADUACAOEAD, POSGRADUACAO;
+}
+
+
+
+package factory;
+
+public enum ListaUnidade {
+	SANTOAMARO, LIBERDADE, SOCORRO;
+}
+
+
+
+package factory;
+
+public class PosGraduacao implements Curso{
+	private String requisito;
+	private String local;
+	
+	public PosGraduacao(String local, String requisito) {
+		this.local = local;
+		this.requisito = requisito;
+	}
+
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
+	public void setRequisito(String requisito) {
+		this.requisito = requisito;
+	}
+
+	@Override
+	public String getRequisito() {
+		return requisito;
+	}
+
+	@Override
+	public String toString() {
+		return "PosGraduacao [requisito=" + requisito + ", local=" + local + "]";
+	}
+}
+
+
+
+package factory;
+
+public class SantoAmaro implements CursoLocal{
+	private String endereco;
+	
+	public SantoAmaro(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	@Override
+	public String getEndereco() {
+		return endereco;
+	}
+
+	@Override
+	public String toString() {
+		return "SantoAmaro [endereco=" + endereco + "]";
+	}
+}
+
+
+
+package factory;
+
+public class Socorro implements CursoLocal{
+	private String endereco;
+	
+	public Socorro(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	@Override
+	public String getEndereco() {
+		return endereco;
+	}
+
+	@Override
+	public String toString() {
+		return "Socorro [endereco=" + endereco + "]";
+	}
+
+}

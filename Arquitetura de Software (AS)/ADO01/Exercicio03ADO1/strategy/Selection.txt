@@ -1,0 +1,27 @@
+package strategy;
+
+public class Selection implements Ordenacao{
+	
+	int[] resultado;
+	
+	public Selection(int[] resultado) {
+		this.resultado = resultado;
+	}
+
+	@Override
+	public int[] ordenar() {
+		int i, j, min, aux;
+		for(i = 0; i<this.resultado.length-1; i++) {
+			min = i;
+			for(j = i + 1;j < this.resultado.length; j++)
+				if(this.resultado[j] < this.resultado[min])
+					min = j;
+		
+		aux = this.resultado[i];
+		this.resultado[i] = this.resultado[min];
+		this.resultado[min] = aux;
+		}
+		return this.resultado;
+	}
+
+}

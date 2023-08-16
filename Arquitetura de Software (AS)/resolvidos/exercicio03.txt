@@ -1,0 +1,136 @@
+package cliente;
+
+import factory.*;
+
+public class UsaFabrica {
+	public static void main(String[] args) {
+		Fabrica fabrica = new FabricaFiguras();
+		System.out.println(fabrica.factoryMethod(ListaFiguras.values()[0]));
+		System.out.println(fabrica.factoryMethod(ListaFiguras.values()[1]));
+		System.out.println(fabrica.factoryMethod(ListaFiguras.values()[2]));
+	}
+}
+
+
+
+package factory;
+
+public interface Fabrica {
+	public FiguraGeometrica factoryMethod(ListaFiguras figura);
+}
+
+
+
+package factory;
+
+public class FabricaFiguras implements Fabrica{
+
+	@Override
+	public FiguraGeometrica factoryMethod(ListaFiguras figura) {
+		if(figura.equals(ListaFiguras.QUADRADO)) {
+			return new Quadrado(4);
+		}
+		else if (figura.equals(ListaFiguras.TRIANGULO)) {
+			return new Triangulo(3);
+		}
+		else if (figura.equals(ListaFiguras.PENTAGONO)) {
+			return new Pentagono(5);
+		}
+		return null;
+	}
+
+}
+
+
+
+package factory;
+
+public interface FiguraGeometrica {
+	public int getAresta();
+}
+
+
+
+package factory;
+
+public enum ListaFiguras {
+	QUADRADO, TRIANGULO, PENTAGONO;
+}
+
+
+
+package factory;
+
+public class Pentagono implements FiguraGeometrica{
+	private int aresta;
+
+	public Pentagono(int aresta) {
+		this.aresta = aresta;
+	}
+
+	@Override
+	public int getAresta() {
+		return aresta;
+	}
+
+	public void setAresta(int aresta) {
+		this.aresta = aresta;
+	}
+
+	@Override
+	public String toString() {
+		return "Pentagono - " + aresta + " arestas";
+	}
+}
+
+
+
+package factory;
+
+public class Quadrado implements FiguraGeometrica{
+	private int aresta;
+
+	public Quadrado(int aresta) {
+		this.aresta = aresta;
+	}
+
+	@Override
+	public int getAresta() {
+		return aresta;
+	}
+
+	public void setAresta(int aresta) {
+		this.aresta = aresta;
+	}
+
+	@Override
+	public String toString() {
+		return "Quadrado - " + aresta + " arestas";
+	}
+}
+
+
+
+package factory;
+
+public class Triangulo implements FiguraGeometrica{
+	private int aresta;
+	
+	public Triangulo(int aresta) {
+		this.aresta = aresta;
+	}
+
+	@Override
+	public int getAresta() {
+		return aresta;
+	}
+
+	public void setAresta(int aresta) {
+		this.aresta = aresta;
+	}
+
+	@Override
+	public String toString() {
+		return "Triangulo - " + aresta + " arestas";
+	}
+}

@@ -1,0 +1,17 @@
+package cliente;
+
+import java.util.Arrays;
+
+import strategy.*;
+
+public class UsaStragegy {
+	public static void main(String[] args) {
+		int[] ordenarBubble = {10, 5, 1, 2, 4, 8, 10, 3, 9, 6, 7, 10};
+		int[] ordenarInsertion = {202, 50, 32, 2, 78};
+		int[] ordenarSelection = {45, 23, 1, 6, 0, 80, 105};
+		
+		System.out.println("Bubble: " + Arrays.toString(new ListaOrdenacao().ordenacao(new Bubble(ordenarBubble))));
+		System.out.println("Insertion: " + Arrays.toString(new ListaOrdenacao().ordenacao(new Insertion(ordenarInsertion))));
+		System.out.println("Selection: " + Arrays.toString(new ListaOrdenacao().ordenacao(new Selection(ordenarSelection))));
+	}
+}

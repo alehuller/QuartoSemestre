@@ -1,0 +1,25 @@
+package strategy;
+
+public class Bubble implements Ordenacao{
+
+	int[] resultado;
+	
+	public Bubble(int[] resultado) {
+		this.resultado = resultado;
+	}
+	
+	@Override
+	public int[] ordenar() {
+		int i, j;
+		int temp;
+		for(j = 0;j < this.resultado.length - 1; j++)
+			for(i = 0;i < this.resultado.length -1 - j; i++)
+				if(this.resultado[i] > this.resultado[i+1]) {
+					temp = this.resultado[i];
+					this.resultado[i] = this.resultado[i+1];
+					this.resultado[i+1] = temp;
+		}
+		return this.resultado;
+	}
+
+}

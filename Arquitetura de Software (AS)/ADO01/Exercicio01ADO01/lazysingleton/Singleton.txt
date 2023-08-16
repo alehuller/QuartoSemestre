@@ -1,0 +1,17 @@
+//codigo usado como base
+package lazysingleton;
+
+public class Singleton {
+	private static Singleton sin;
+    
+    private Singleton(){
+    }
+    
+    public static synchronized Singleton getInstance(){ //synchronized faz com que o método não seja acessado por mais de uma thread ao mesmo tempo. Sempre as intâncias da classe dão na mesma thread. Dessa maneira, o código não é quebrado.
+      if(sin==null)
+          sin=new Singleton();
+        
+      return sin;
+    }
+
+}
